@@ -1,3 +1,5 @@
-{% block content %}
-{{listings}}
-{% endblock %}
+{% for listing in listings %}
+
+<p>{{listing.title}}</p>
+
+{% endfor %}
