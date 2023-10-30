@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
 from .models import Listing
 from .forms import ListingForm
 
@@ -15,6 +16,9 @@ def listing_create(request):
         form = ListingForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Listing is created successfully.")
+            return redirect('list')
+    else:
+        form = ListingForm()
 
-            return render(request, 'listing_create.html', context={'form': form})
-
+    return render(request, 'listing_create.html', context={'form': form})
