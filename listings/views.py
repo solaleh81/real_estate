@@ -11,5 +11,10 @@ def listing_retrieve(request, id):
     return render(request, 'listing.html', context={'listing': listing})
 
 def listing_create(request):
-    form = ListingForm()
-    return render(request, 'listing_create.html', context={'form': form})
+    if request.method == 'POST':
+        form = ListingForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return render(request, 'listing_create.html', context={'form': form})
+
